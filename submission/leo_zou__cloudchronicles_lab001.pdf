@@ -1,0 +1,31 @@
+A STAR-based disaster recovery plan (Storage, Transactions, Analytics, and Recovery) for a Google Cloud us-central1 regional outage would involve designing a failover strategy using Google Cloud’s resilience features. Here’s how you can approach it:
+
+Storage
+Multi-region Cloud Storage: Ensure critical data is stored in multi-region buckets so it's accessible even if us-central1 is down.
+
+Cloud SQL Read Replicas: Set up replicas in another region like us-east1 or us-west1 so the database can fail over seamlessly.
+
+Transactions
+Global Load Balancer: Implement a Cloud Load Balancer that redirects traffic away from the affected region.
+
+Cloud SQL Failover Instance: If using Cloud SQL, configure an automatic failover instance in a different region.
+
+Analytics
+BigQuery Multi-region Dataset: Store analytics data in a multi-region dataset to ensure queries remain available.
+
+Pub/Sub Alerts & Logging: Use Pub/Sub to publish outage alerts and track logs with Cloud Monitoring.
+
+Recovery
+Failover Activation:
+
+Cloud SQL automatically promotes a read replica to primary.
+
+Cloud Load Balancer reroutes traffic to healthy regions.
+
+Multi-region storage ensures object availability.
+
+Service Restoration:
+
+Ensure Cloud Functions or Cloud Run services have backups in another region.
+
+Restart affected instances after us-central1 is back online.
